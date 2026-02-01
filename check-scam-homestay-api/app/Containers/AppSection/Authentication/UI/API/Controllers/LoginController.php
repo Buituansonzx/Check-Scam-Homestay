@@ -1,0 +1,17 @@
+<?php
+
+namespace App\Containers\AppSection\Authentication\UI\API\Controllers;
+
+use App\Containers\AppSection\Authentication\Actions\LoginAction;
+use App\Containers\AppSection\Authentication\UI\API\Requests\LoginRequest;
+use App\Ship\Parents\Controllers\ApiController;
+
+final class LoginController extends ApiController
+{
+    public function login(LoginRequest $request, LoginAction $action)
+    {
+        $data = $action->run($request->validated());
+        return response()->json( ['data' => $data] );
+    }
+
+}
