@@ -23,14 +23,15 @@
 
 ## 📋 Danh sách Tables
 
-### Core Tables (4 bảng)
+### Core Tables (5 bảng)
 
-| #   | Tên Table   | Mô tả                             | Migration File       |
-| --- | ----------- | --------------------------------- | -------------------- |
-| 1   | **users**   | Người dùng hệ thống               | Built-in Apiato      |
-| 2   | **homes**   | Thông tin homestay/nhà trọ        | create_homes_table   |
-| 3   | **sallers** | Người bán/môi giới                | create_sallers_table |
-| 4   | **objects** | Thông tin liên lạc & Social links | create_objects_table |
+| #   | Tên Table         | Mô tả                             | Migration File             |
+| --- | ----------------- | --------------------------------- | -------------------------- |
+| 1   | **users**         | Người dùng hệ thống               | Built-in Apiato            |
+| 2   | **homes**         | Thông tin homestay/nhà trọ        | create_homes_table         |
+| 3   | **sallers**       | Người bán/môi giới                | create_sallers_table       |
+| 4   | **object_groups** | Nhóm thông tin liên lạc           | create_object_groups_table |
+| 5   | **objects**       | Thông tin liên lạc & Social links | create_objects_table       |
 
 ### Posts Module (5 bảng)
 
@@ -144,13 +145,17 @@
 - Belongs To → `users` (N-1, nullable)
 - Has Many → `objects` (1-N)
 
+- Has Many → `object_groups` (1-N)
+
 ---
 
-### 4. Table: objects
+### 4. Table: object_groups
 
 | Tên Cột       | Kiểu Dữ Liệu | Ràng Buộc                | Mô Tả                     |
 | ------------- | ------------ | ------------------------ | ------------------------- |
-| id            | UUID         | PK                       | ID object                 |
+| id            | UUID         | PK                       | ID nhóm                   |
+| name          | VARCHAR(255) | NOT NULL                 | Tên nhóm                  |
+| description   | TEXT         | NULLABLE                 | Mô tả nhóm                |
 | home_id       | UUID         | FK NULLABLE → homes.id   | Liên kết với homestay     |
 | saller_id     | UUID         | FK NULLABLE → sallers.id | Liên kết với người bán    |
 | phone         | VARCHAR(20)  | NULLABLE                 | SĐT ngắn (0987654321)     |
@@ -176,11 +181,48 @@
 
 - Belongs To → `homes` (N-1, nullable)
 - Belongs To → `sallers` (N-1, nullable)
+- Has Many → `objects` (1-N)
+
+---
+
+### 5. Table: objects
+
+| Tên Cột         | Kiểu Dữ Liệu | Ràng Buộc                      | Mô Tả                     |
+| --------------- | ------------ | ------------------------------ | ------------------------- |
+| id              | UUID         | PK                             | ID object                 |
+| home_id         | UUID         | FK NULLABLE → homes.id         | Liên kết với homestay     |
+| saller_id       | UUID         | FK NULLABLE → sallers.id       | Liên kết với người bán    |
+| object_group_id | UUID         | FK NULLABLE → object_groups.id | Liên kết với nhóm         |
+| phone           | VARCHAR(20)  | NULLABLE                       | SĐT ngắn (0987654321)     |
+| phone_full      | VARCHAR(20)  | NULLABLE                       | SĐT đầy đủ (+84987654321) |
+| bank_account    | VARCHAR(50)  | NULLABLE                       | Số tài khoản ngân hàng    |
+| link_facebook   | VARCHAR(500) | NULLABLE                       | URL Facebook              |
+| link_tiktok     | VARCHAR(500) | NULLABLE                       | URL Tiktok                |
+| link_zalo       | VARCHAR(500) | NULLABLE                       | URL Zalo                  |
+| link_website    | VARCHAR(500) | NULLABLE                       | URL Website               |
+| link_other      | VARCHAR(500) | NULLABLE                       | URL khác                  |
+| is_scam         | BOOLEAN      | DEFAULT false                  | Trạng thái lừa đảo        |
+| created_at      | TIMESTAMP    | AUTO                           | Thời gian tạo             |
+| updated_at      | TIMESTAMP    | AUTO                           | Thời gian cập nhật        |
+
+**Indexes:**
+
+- Primary Key: `id`
+- Index: `home_id`, `saller_id`, `object_group_id`, `phone`, `phone_full`, `bank_account`
+- Foreign Key: `home_id` → `homes(id)` ON DELETE CASCADE
+- Foreign Key: `saller_id` → `sallers(id)` ON DELETE CASCADE
+- Foreign Key: `object_group_id` → `object_groups(id)` ON DELETE CASCADE
+
+**Relationships:**
+
+- Belongs To → `homes` (N-1, nullable)
+- Belongs To → `sallers` (N-1, nullable)
+- Belongs To → `object_groups` (N-1, nullable)
 - Has Many → `posts` (1-N)
 
 ---
 
-### 5. Table: post_types
+### 6. Table: post_types
 
 | Tên Cột     | Kiểu Dữ Liệu | Ràng Buộc        | Mô Tả              |
 | ----------- | ------------ | ---------------- | ------------------ |
@@ -352,11 +394,17 @@
 | users          | Has Many     | sallers             | 1-N         | SET NULL  |
 | users          | Has Many     | posts               | 1-N         | SET NULL  |
 | users          | Has Many     | comments            | 1-N         | SET NULL  |
+| homes          | Has Many     | object_groups       | 1-N         | CASCADE   |
 | homes          | Has Many     | objects             | 1-N         | CASCADE   |
 | sallers        | Belongs To   | users               | N-1         | SET NULL  |
+| sallers        | Has Many     | object_groups       | 1-N         | CASCADE   |
 | sallers        | Has Many     | objects             | 1-N         | CASCADE   |
+| object_groups  | Belongs To   | homes               | N-1         | CASCADE   |
+| object_groups  | Belongs To   | sallers             | N-1         | CASCADE   |
+| object_groups  | Has Many     | objects             | 1-N         | CASCADE   |
 | objects        | Belongs To   | homes               | N-1         | CASCADE   |
 | objects        | Belongs To   | sallers             | N-1         | CASCADE   |
+| objects        | Belongs To   | object_groups       | N-1         | CASCADE   |
 | objects        | Has Many     | posts               | 1-N         | CASCADE   |
 | post_types     | Has Many     | posts               | 1-N         | SET NULL  |
 | posts          | Belongs To   | objects             | N-1         | CASCADE   |
@@ -376,17 +424,18 @@
 
 ## 📝 Migration Order
 
-| Thứ Tự | Table          | Migration File              | Phụ Thuộc                  |
-| ------ | -------------- | --------------------------- | -------------------------- |
-| 1      | users          | Built-in Apiato             | -                          |
-| 2      | homes          | create_homes_table          | -                          |
-| 3      | sallers        | create_sallers_table        | users                      |
-| 4      | objects        | create_objects_table        | homes, sallers             |
-| 5      | post_types     | create_post_types_table     | -                          |
-| 6      | posts          | create_posts_table          | objects, users, post_types |
-| 7      | post_images    | create_post_images_table    | posts                      |
-| 8      | comments       | create_comments_table       | posts, users               |
-| 9      | comment_images | create_comment_images_table | comments                   |
+| Thứ Tự | Table          | Migration File              | Phụ Thuộc                     |
+| ------ | -------------- | --------------------------- | ----------------------------- |
+| 1      | users          | Built-in Apiato             | -                             |
+| 2      | homes          | create_homes_table          | -                             |
+| 3      | sallers        | create_sallers_table        | users                         |
+| 4      | object_groups  | create_object_groups_table  | homes, sallers                |
+| 5      | objects        | create_objects_table        | homes, sallers, object_groups |
+| 6      | post_types     | create_post_types_table     | -                             |
+| 7      | posts          | create_posts_table          | objects, users, post_types    |
+| 8      | post_images    | create_post_images_table    | posts                         |
+| 9      | comments       | create_comments_table       | posts, users                  |
+| 10     | comment_images | create_comment_images_table | comments                      |
 
 ---
 
