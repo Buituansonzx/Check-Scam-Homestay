@@ -1,0 +1,36 @@
+.authModal__title {
+	margin-top: 0;
+	text-align: center;
+}
+
+.authModal__socialButtons {
+	width: 100%;
+}
+
+.authModal__socialIcon {
+	display: inline-flex;
+	width: 16px;
+	height: 16px;
+	align-items: center;
+	justify-content: center;
+}
+
+.authModal__socialIcon svg {
+	display: block;
+}
+
+.authModal__socialButton.ant-btn {
+	justify-content: center;
+}
+
+.authModal__socialButton .ant-btn-icon {
+	display: inline-flex;
+	align-items: center;
+}
+
+.authModal__switchLink.ant-btn-link {
+	padding: 0;
+	height: auto;
+	color: #ff6b35;
+	text-decoration: underline;
+}

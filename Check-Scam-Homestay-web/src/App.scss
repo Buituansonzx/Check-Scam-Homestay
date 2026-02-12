@@ -1,0 +1,48 @@
+
+.app-root {
+	min-height: 100vh;
+}
+
+.app-header {
+	padding: 0;
+	background: var(--app-bg);
+	display: flex;
+	align-items: center;
+	box-shadow: 0px 2px 15px 0px #0C429926;
+	border-bottom: 1px solid #e5e7eb;
+}
+
+.app-logo {
+	display: flex;
+	align-items: center;
+	margin: 16px 0 16px 24px;
+	flex: 0 0 auto;
+}
+
+.app-logoText {
+	font-size: 32px;
+	font-weight: 800;
+	color: #0094dc;
+	letter-spacing: 1px;
+}
+
+.app-headerRight {
+	display: flex;
+	align-items: center;
+	margin-right: 16px;
+	margin-left: auto;
+}
+
+.app-main {
+	height: calc(100vh - 64px);
+}
+
+.app-sider {
+	border-right: 1px solid #e5e7eb;
+	overflow: hidden;
+}
+
+.app-content {
+	min-height: 360px;
+	background: var(--app-bg);
+}

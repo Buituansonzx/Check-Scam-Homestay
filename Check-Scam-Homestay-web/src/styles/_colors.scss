@@ -1,0 +1,185 @@
+// Ghi chú: Để thêm mã màu mới cho theme, hãy làm như sau:
+// 1. Thêm biến mới vào :root (theme sáng) và [data-theme="dark"] (theme tối), ví dụ:
+//    :root { --brand-color: #ff6600; }
+//    [data-theme="dark"] { --brand-color: #ff9900; }
+// 2. (Tùy chọn) Map biến CSS sang biến SCSS: $brand-color: var(--brand-color);
+// 3. Sử dụng $brand-color trong SCSS hoặc var(--brand-color) trong style/component.
+// Khi đổi theme, giá trị sẽ tự động đổi theo theme.
+
+$white: #ffffff;
+$black: #000000;
+
+// Gray scale
+$gray-100: #f9f9f9;
+$gray-200: #f0f0f0;
+$gray-300: #e5e5e5;
+$gray-400: #d9d9d9;
+$gray-500: #bfbfbf;
+$gray-600: #8c8c8c;
+$gray-700: #595959;
+$gray-800: #434343;
+$gray-900: #262626;
+
+// Theme variables with light default
+:root {
+  // Primary colors
+  --primary-color: #0c4299;
+  --primary-light: #083070;
+  --primary-dark: #1669ef;
+  --primary-zumthor: #ebf2ff;
+
+  // Brand
+  --brand: #ff6b35;
+
+  // Secondary colors
+  --secondary-color: #f5f5f5;
+  --secondary-light: #fafafa;
+  --secondary-dark: #e8e8e8;
+
+  // Text colors
+  --text-primary: #081834;
+  --text-secondary-100: #2b4065;
+  --text-secondary-200: #4d5b72;
+  --text-disabled: #aeb5bf;
+
+  // Background colors
+  --bg-color: #f0f2f5;
+  --bg-light: #fafafa;
+  --bg-dark: #e6e6e6;
+  --bg-card: #{$white};
+
+  // Border colors
+  --border-color: #d9d9d9;
+
+  // Functional colors
+  --info-color: #1890ff;
+  --success-color: #52c41a;
+  --warning-color: #faad14;
+  --error-color: #f5222d;
+
+  // Box shadow
+  --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+  // Các màu cảnh báo custom
+  --color-warning-main: #f57921;
+  --color-warning-hover: #d48806;
+  --color-border: #ebecf0;
+}
+
+// Dark theme variables
+[data-theme='pink'] {
+  // Primary colors - keep the same for brand consistency
+  --primary-color: #ed0372;
+  --primary-light: #7f023d;
+  --primary-dark: #f9ccdf;
+  --primary-zumthor: #fff0f6;
+
+  // Secondary colors - darker for dark theme
+  --secondary-color: #333333;
+  --secondary-light: #424242;
+  --secondary-dark: #212121;
+
+  // Text colors - lighter for dark theme
+  --text-primary: #081834;
+  --text-secondary: #a0a0a0;
+  --text-disabled: #6c6c6c;
+
+  // Background colors - darker for dark theme
+  --bg-color: #121212;
+  --bg-light: #1e1e1e;
+  --bg-dark: #0a0a0a;
+  --bg-card: #252525;
+
+  // Border colors - darker for dark theme
+  --border-color: #434343;
+}
+
+// Dark theme variables
+[data-theme='dark'] {
+  // Primary colors - keep the same for brand consistency
+  --primary-color: #1890ff;
+  --primary-light: #40a9ff;
+  --primary-dark: #096dd9;
+
+  // Brand
+  --brand: #ff6b35;
+
+  // Secondary colors - darker for dark theme
+  --secondary-color: #333333;
+  --secondary-light: #424242;
+  --secondary-dark: #212121;
+
+  // Text colors - lighter for dark theme
+  --text-primary: #e0e0e0;
+  --text-secondary: #a0a0a0;
+  --text-disabled: #6c6c6c;
+
+  // Background colors - darker for dark theme
+  --bg-color: #121212;
+  --bg-light: #1e1e1e;
+  --bg-dark: #0a0a0a;
+  --bg-card: #252525;
+
+  // Border colors - darker for dark theme
+  --border-color: #434343;
+}
+
+// Map CSS variables to SCSS variables for backward compatibility
+$primary-color: var(--primary-color);
+$primary-light: var(--primary-light);
+$primary-dark: var(--primary-dark);
+$primary-zumthor: var(--primary-zumthor);
+
+$secondary-color: var(--secondary-color);
+$secondary-light: var(--secondary-light);
+$secondary-dark: var(--secondary-dark);
+
+$text-primary: var(--text-primary);
+$text-secondary: var(--text-secondary);
+$text-disabled: var(--text-disabled);
+
+// Functional colors
+:root {
+  --info-color: #1890ff;
+  --success-color: #52c41a;
+  --warning-color: #faad14;
+  --error-color: #f5222d;
+}
+
+[data-theme='dark'] {
+  --info-color: #177ddc;
+  --success-color: #49aa19;
+  --warning-color: #d89614;
+  --error-color: #d32029;
+}
+
+// Map CSS variables to SCSS variables for backward compatibility
+$info-color: var(--info-color);
+$success-color: var(--success-color);
+$warning-color: var(--warning-color);
+$error-color: var(--error-color);
+$bg-color: var(--bg-color);
+$bg-light: var(--bg-light);
+$bg-dark: var(--bg-dark);
+$border-color: var(--border-color);
+
+// These don't need to change based on theme
+$border-radius-sm: 4px;
+$border-radius-md: 8px;
+$border-radius-lg: 16px;
+
+// Shadow
+:root {
+  --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme='dark'] {
+  --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+$box-shadow: var(--box-shadow);
+
+// Warning theme colors
+$color-warning-main: #f57921;
+$color-warning-hover: #d48806;
+$color-border: #ebecf0;

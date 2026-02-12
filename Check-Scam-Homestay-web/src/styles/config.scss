@@ -1,0 +1,8 @@
+// Main style configuration file that forwards all variables and mixins
+@forward './colors';
+@forward './mixins';
+
+@use './colors' as *;
+
+// This file can be used in any component that needs access to colors and mixins
+// Example: `@use '../styles/config' as *;`
