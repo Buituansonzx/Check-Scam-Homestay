@@ -10,16 +10,23 @@ use Laravel\Socialite\Facades\Socialite;
 
 final class SocialCallbackController extends ApiController
 {
-    public function callback(string $provider, LoginWithSocialAction $action)
+    public function callback(string $provider, LoginWithSocialAction $action): \Illuminate\Http\RedirectResponse
     {
         $result = $action->run($provider);
+        $user = $result['user'];
+        $token = $result['access_token'];
 
-        return Response::create($result['user'], UserTransformer::class)
-            ->addMeta([
-                'token_type' => 'Bearer',
-                'access_token' => $result['access_token'],
-            ])
-            ->ok();
+        // Use env variable or default frontend URL
+        $frontendUrl = config('app.frontend_url', 'http://localhost:3000') . '/auth/callback';
+        
+        $userData = rawurlencode(json_encode([
+            'id' => $user->id,
+            'name' => $user->name,
+            'email' => $user->email,
+            'roles' => $user->roles->pluck('name'),
+        ]));
+
+        return redirect()->away("{$frontendUrl}?token={$token}&user={$userData}");
     }
 
     public function redirect(string $provider)
