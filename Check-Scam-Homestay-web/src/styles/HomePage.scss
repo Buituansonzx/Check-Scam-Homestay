@@ -1,0 +1,36 @@
+@use './config' as *;
+
+.home-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 70vh;
+
+  .counter-container {
+    background-color: $white;
+    border-radius: $border-radius-md;
+    box-shadow: $box-shadow;
+    padding: 2rem;
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+
+    h2 {
+      color: $text-primary;
+      margin-bottom: 1.5rem;
+    }
+
+    .count {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: $primary-color;
+    }
+
+    .button-group {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+  }
+}

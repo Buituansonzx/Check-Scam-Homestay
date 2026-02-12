@@ -1,0 +1,47 @@
+@use '../styles/config' as *;
+
+.theme-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background-color 0.3s,
+    transform 0.3s;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  svg {
+    color: $text-primary;
+    transition:
+      color 0.3s,
+      transform 0.3s;
+  }
+
+  &.dark {
+    svg {
+      color: $white;
+    }
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+  }
+
+  &.light {
+    svg {
+      color: $text-primary;
+    }
+  }
+}

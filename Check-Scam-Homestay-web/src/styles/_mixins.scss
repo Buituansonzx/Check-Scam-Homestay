@@ -1,0 +1,87 @@
+// ---------------------------------------------
+// File: _mixins.scss
+// Tác dụng: Chứa các mixin SCSS dùng chung cho toàn dự án
+// - Định nghĩa các mixin flexbox (flex-center, flex-column, flex-between)
+// - Định nghĩa các mixin style text (heading-1, heading-2, body-text)
+// - Định nghĩa mixin style button (button-base)
+// - Định nghĩa các biến breakpoint và mixin responsive (respond-to)
+// => Giúp tái sử dụng code, viết CSS/SCSS ngắn gọn, đồng nhất, dễ bảo trì
+// ---------------------------------------------
+
+// Common mixins and utilities for the project
+@use './colors' as *;
+
+// Flexbox mixins
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+// Text styles
+@mixin heading-1 {
+  font-size: 2.5rem;
+  font-weight: 600;
+  line-height: 1.2;
+  color: $text-primary;
+}
+
+@mixin heading-2 {
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1.2;
+  color: $text-primary;
+}
+
+@mixin body-text {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: $text-secondary;
+}
+
+// Button styles
+@mixin button-base {
+  padding: 0.5rem 1rem;
+  border-radius: $border-radius-sm;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+// Responsive breakpoints
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == sm {
+    @media (min-width: $breakpoint-sm) {
+      @content;
+    }
+  } @else if $breakpoint == md {
+    @media (min-width: $breakpoint-md) {
+      @content;
+    }
+  } @else if $breakpoint == lg {
+    @media (min-width: $breakpoint-lg) {
+      @content;
+    }
+  } @else if $breakpoint == xl {
+    @media (min-width: $breakpoint-xl) {
+      @content;
+    }
+  }
+}

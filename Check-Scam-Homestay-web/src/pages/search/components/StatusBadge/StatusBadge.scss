@@ -1,0 +1,43 @@
+.searchResult__statusBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.searchResult__statusDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.searchResult__statusBadge--blacklisted {
+  background-color: #fee2e2;
+  color: #ef4444;
+}
+
+.searchResult__statusBadge--blacklisted .searchResult__statusDot {
+  background-color: #ef4444;
+}
+
+.searchResult__statusBadge--caution {
+  background-color: #ffedd5;
+  color: #f97316;
+}
+
+.searchResult__statusBadge--caution .searchResult__statusDot {
+  background-color: #f97316;
+}
+
+.searchResult__statusBadge--verified {
+  background-color: #dcfce7;
+  color: #22c55e;
+}
+
+.searchResult__statusBadge--verified .searchResult__statusDot {
+  background-color: #22c55e;
+}

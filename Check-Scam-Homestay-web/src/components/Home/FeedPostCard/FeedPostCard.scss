@@ -1,0 +1,93 @@
+.feedPostCard.ant-card {
+  border-radius: 18px;
+}
+
+.feedPostCard__header {
+  width: 100%;
+}
+
+.feedPostCard__meta {
+  flex: 1;
+  min-width: 0;
+}
+
+.feedPostCard__nameRow {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.feedPostCard__badge.ant-tag {
+  border-radius: 999px;
+  margin-inline-end: 0;
+  font-size: 11px;
+  padding: 2px 8px;
+}
+
+.feedPostCard__title.ant-typography {
+  margin-top: 12px;
+  margin-bottom: 6px;
+}
+
+.feedPostCard__desc {
+  display: block;
+  margin-bottom: 12px;
+}
+
+.feedPostCard__media {
+  border-radius: 18px;
+  height: 280px;
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.feedPostCard__footer {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.feedPostCard__footerRight {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.feedPostCard__stat {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.65);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.feedPostCard__cta.ant-btn {
+  border-radius: 999px;
+  background: rgba(255, 107, 53, 0.12);
+  border-color: transparent;
+  color: #ff6b35;
+}
+
+.feedPostCard__cta.ant-btn:hover,
+.feedPostCard__cta.ant-btn:active {
+  background: rgba(255, 107, 53, 0.16);
+  border-color: transparent;
+  color: #ff6b35;
+}
+
+.feedPostCard__share.ant-btn {
+  padding-inline: 4px;
+}
+
+.feedPostCard__disclaimer.ant-typography {
+  margin-top: 8px;
+  display: block;
+  font-size: 11px;
+  line-height: 1.35;
+  color: rgba(0, 0, 0, 0.45);
+}

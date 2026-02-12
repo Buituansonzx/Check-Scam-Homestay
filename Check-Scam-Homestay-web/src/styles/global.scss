@@ -1,0 +1,43 @@
+@use './config' as *;
+@use './typography' as *;
+
+// Global styles
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: $font-sans;
+  font-weight: $font-w-regular;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: $bg-light;
+  color: $text-primary;
+}
+
+// App container styles
+.app-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+
+  header {
+    text-align: center;
+    margin-bottom: 2rem;
+
+    h1 {
+      color: $text-primary;
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      color: $text-secondary;
+      font-size: 1.2rem;
+      margin: 10px 0 20px;
+    }
+  }
+
+  main {
+    padding: 1rem 0;
+  }
+}

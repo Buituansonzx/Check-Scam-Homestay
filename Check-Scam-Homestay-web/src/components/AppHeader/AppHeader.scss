@@ -1,0 +1,47 @@
+.appHeader {
+  padding: 0 16px;
+  background: #fff;
+  border-bottom: 1px solid rgba(5, 5, 5, 0.06);
+}
+
+.appHeader__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.appHeader__brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  color: #FF6B35;
+  text-decoration: none;
+}
+
+.appHeader__brand:hover,
+.appHeader__brand:visited,
+.appHeader__brand:active {
+  color: #FF6B35;
+  text-decoration: none;
+}
+
+.appHeader__logo {
+  display: block;
+  width: 36px;
+  height: 36px;
+}
+
+.appHeader__name {
+  line-height: 1;
+  font-size: 18px;
+}
+
+.appHeader__filter {
+  flex: 1;
+  min-width: 320px;
+}
