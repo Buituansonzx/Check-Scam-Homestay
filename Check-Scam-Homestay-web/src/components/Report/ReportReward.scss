@@ -1,0 +1,47 @@
+.reportReward {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 18px;
+  background: #fff7ed;
+  border: 1px solid rgba(255, 107, 53, 0.16);
+}
+
+.reportReward__icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  flex: none;
+}
+
+.reportReward__medalIcon {
+  width: 40px;
+  height: 40px;
+  display: block;
+}
+
+.reportReward__icon span {
+  width: 12px;
+  height: 12px;
+  border-radius: 4px;
+  background: #ff6b35;
+}
+
+.reportReward__label {
+  font-size: 11px;
+  color: #0f172a;
+  opacity: 0.7;
+  font-weight: 600;
+}
+
+.reportReward__value {
+  font-size: 12px;
+  font-weight: 800;
+  color: #ff6b35;
+}
