@@ -1,0 +1,14 @@
+.social-callback-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    gap: 20px;
+
+    .loading-text {
+        font-size: 16px;
+        color: #666;
+        font-weight: 500;
+    }
+}

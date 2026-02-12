@@ -6,6 +6,7 @@ import Home from './pages/home/Home';
 import Report from './pages/report/Report';
 import Search from './pages/search/Search';
 import SearchDetail from './pages/search/SearchDetail';
+import SocialCallback from './pages/auth/SocialCallback';
 
 export default function App(): React.ReactElement {
   return (
@@ -25,6 +26,7 @@ export default function App(): React.ReactElement {
             <Route path='/search' element={<Search />} />
             <Route path='/search/:id' element={<SearchDetail />} />
             <Route path='/report' element={<Report />} />
+            <Route path='/auth/callback' element={<SocialCallback />} />
           </Route>
         </Routes>
       </BrowserRouter>
