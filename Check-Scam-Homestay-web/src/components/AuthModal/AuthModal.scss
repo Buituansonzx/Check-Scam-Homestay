@@ -1,36 +1,401 @@
-.authModal__title {
-	margin-top: 0;
-	text-align: center;
+.auth-modal {
+  .ant-modal-content {
+    padding: 0;
+    overflow: hidden;
+    border-radius: 16px;
+  }
+
+  .ant-modal-body {
+    padding: 0;
+  }
+}
+
+.authModal__container {
+  display: flex;
+  min-height: 480px; // Reduced from 550px
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+.authModal__left {
+  flex: 0 0 40%;
+  background-color: #fff8f0; 
+  padding: 30px 24px; // Reduced padding
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+
+  @media (max-width: 768px) {
+    display: none; 
+  }
+
+  .authModal__logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    font-size: 20px;
+    color: #ff5a3c; 
+    margin-bottom: 16px; // Reduced margin
+    
+    img { display: block; }
+  }
+
+  .authModal__headline {
+    font-size: 24px; // Slightly smaller font
+    font-weight: 800;
+    line-height: 1.2;
+    color: #1a1a1a;
+    margin-bottom: 8px;
+  }
+
+  .authModal__subtext {
+    font-size: 13px;
+    color: #666;
+    line-height: 1.5;
+    margin-bottom: 24px;
+  }
+
+  .bg-glow-center {
+     position: absolute;
+     width: 300px;
+     height: 300px;
+     background: radial-gradient(circle, rgba(255, 200, 150, 0.4) 0%, rgba(255, 248, 240, 0) 70%);
+     top: 50%;
+     left: 50%;
+     transform: translate(-50%, -50%);
+     z-index: 0;
+     pointer-events: none;
+  }
+
+  .bg-circle-bottom {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      background: #ffebe0; // Slightly darker than main bg
+      border-radius: 50%;
+      bottom: -60px;
+      left: -60px;
+      z-index: 0;
+      pointer-events: none;
+  }
+
+  .authModal__illustration {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 2; // Above background shapes
+    
+    // Backdrop Card (The one with Verified Badge)
+    .backdrop-card {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-5deg);
+      width: 240px;
+      height: 140px;
+      background: white;
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.06);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      z-index: 1;
+
+      .card-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        
+        .lines {
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+          flex: 1;
+        }
+      }
+
+      .line {
+        height: 8px;
+        background: #F0F2F5;
+        border-radius: 4px;
+        
+        &.long { width: 80%; }
+        &.short { width: 50%; }
+        &.full { width: 100%; }
+      }
+      
+      .lines.body {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-top: 4px;
+      }
+    }
+
+    // Floating Front Card (Insurance Badge)
+    .floating-card {
+      position: absolute;
+      top: 60%;
+      left: 55%;
+      transform: translate(-50%, -20%) rotate(2deg);
+      background: white;
+      padding: 10px 16px 10px 10px;
+      border-radius: 50px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 2;
+      border: 1px solid rgba(0,0,0,0.02);
+
+      .shield-icon {
+        width: 36px;
+        height: 36px;
+        // background: #FFF2F0; (optional, if shield needs bg)
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      .card-text {
+        color: #1a1a1a;
+        font-weight: 700;
+        font-size: 13px;
+        white-space: nowrap;
+      }
+    }
+  }
+
+  .authModal__community {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+    font-size: 11px;
+    color: #666;
+    position: relative; // Ensure it stacks above background
+    z-index: 2;
+
+    .avatars {
+      display: flex;
+      .avatar {
+        width: 28px; // Increased size slightly
+        height: 28px;
+        border-radius: 50%;
+        border: 2px solid white;
+        object-fit: cover; // For images
+        background: #ddd;
+        margin-left: -10px; // More overlap
+        &:first-child { margin-left: 0; }
+        
+        &.more {
+             background: #333;
+             color: white;
+             font-size: 10px;
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             font-weight: 600;
+        }
+      }
+    }
+  }
+}
+
+.authModal__right {
+  flex: 1;
+  padding: 30px 40px; // Reduced padding
+  background: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  @media (max-width: 576px) {
+    padding: 24px 20px;
+  }
+
+  .form-title {
+    font-size: 22px; // Slightly smaller
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 4px;
+  }
+
+  .form-subtitle {
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 16px; // Reduced margin
+  }
 }
 
 .authModal__socialButtons {
-	width: 100%;
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px; // Reduced margin
+
+  .social-btn {
+    flex: 1;
+    height: 36px; // Reduced height
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 18px; 
+    font-weight: 500;
+    font-size: 13px;
+    
+    &.google {
+      border: 1px solid #ddd;
+      color: #333;
+      background: white;
+      &:hover { background: #f9f9f9; }
+    }
+
+    &.facebook {
+      background: #1877f2;
+      color: white;
+      border: none;
+      &:hover { background: #166fe5; }
+    }
+
+    .icon {
+      margin-right: 6px;
+      display: flex;
+    }
+  }
 }
 
-.authModal__socialIcon {
-	display: inline-flex;
-	width: 16px;
-	height: 16px;
-	align-items: center;
-	justify-content: center;
+.authModal__divider {
+  display: flex;
+  align-items: center;
+  margin: 16px 0; // Reduced margin
+  color: #bbb;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+
+  &::before, &::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #eee;
+  }
+  span { padding: 0 10px; }
 }
 
-.authModal__socialIcon svg {
-	display: block;
+.authModal__form {
+  .ant-form-item {
+    margin-bottom: 12px; // Reduced margin
+    
+    label {
+      font-size: 12px;
+      font-weight: 600;
+    }
+  }
+
+  // Target regular Input and Password Wrapper
+  .ant-input:not(.ant-input-affix-wrapper > input),
+  .ant-input-affix-wrapper {
+    height: 40px; // Reduced height form 44px
+    border-radius: 8px;
+    background: #f9f9f9;
+    border: 1px solid transparent;
+    padding: 4px 11px;
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+
+    &:hover, &:focus, &:focus-within {
+      background: white;
+      border-color: #ff5a3c;
+      box-shadow: 0 0 0 2px rgba(255, 90, 60, 0.1);
+    }
+    
+    // Reset styles for inner input elements
+    input.ant-input {
+      background: transparent;
+      border: none;
+      height: 100%;
+      box-shadow: none;
+      font-size: 13px;
+      
+      &:focus {
+        box-shadow: none;
+      }
+    }
+  }
+
+  .submit-btn {
+    height: 40px; // Reduced height
+    background: #ff5a3c; 
+    border-color: #ff5a3c;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 14px;
+    margin-top: 8px; // Reduced margin
+    text-transform: uppercase;
+    box-shadow: 0 4px 15px rgba(255, 90, 60, 0.3);
+
+    &:hover {
+      background: #e64a2e !important;
+      border-color: #e64a2e !important;
+      transform: translateY(-1px);
+    }
+  }
 }
 
-.authModal__socialButton.ant-btn {
-	justify-content: center;
+.authModal__footer {
+  text-align: center;
+  margin-top: 16px; // Reduced margin
+  font-size: 13px;
+  color: #666;
+
+  .link-btn {
+    color: #ff5a3c;
+    font-weight: 600;
+    padding: 0 4px;
+    &:hover { text-decoration: underline; }
+  }
 }
 
-.authModal__socialButton .ant-btn-icon {
-	display: inline-flex;
-	align-items: center;
-}
+// Password Validation Styles - Global Scope to ensure it works in Form.Item help
+.password-requirements {
+  margin-top: 8px;
+  font-size: 12px;
+  line-height: 1.5;
+  
+  .requirement-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+    color: #666;
+    transition: all 0.2s;
 
-.authModal__switchLink.ant-btn-link {
-	padding: 0;
-	height: auto;
-	color: #ff6b35;
-	text-decoration: underline;
+    // Force green color for valid items, even inside error containers
+    &.valid {
+      color: #52c41a !important; 
+      .icon { color: #52c41a !important; }
+    }
+
+    &.invalid {
+      color: #ff4d4f; 
+      .icon { color: #ff4d4f; }
+    }
+
+    .icon {
+      font-size: 12px;
+      width: 14px;
+      display: flex;
+      justify-content: center;
+    }
+  }
 }

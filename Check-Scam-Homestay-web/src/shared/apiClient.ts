@@ -1,5 +1,6 @@
 import axios, { AxiosError, type AxiosInstance, type InternalAxiosRequestConfig } from 'axios';
 import { getEnvString } from './env';
+import { getCookie } from './utils/cookie';
 
 export class ApiError extends Error {
   status?: number;
@@ -22,18 +23,6 @@ function parseTimeoutMs(): number {
 
 function parseBaseUrl(): string | undefined {
   return getEnvString('API_BASE_URL') ?? getEnvString('REACT_APP_API_BASE_URL');
-}
-console.log(parseBaseUrl());
-
-/**
- * Helper to get a cookie value by name from document.cookie
- */
-function getCookie(name: string): string | undefined {
-  if (typeof document === 'undefined') return undefined;
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; ${name}=`);
-  if (parts.length === 2) return parts.pop()?.split(';').shift();
-  return undefined;
 }
 
 export function toApiError(error: unknown): Error {
