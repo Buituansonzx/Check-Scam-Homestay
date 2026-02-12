@@ -1,7 +1,10 @@
 import React from 'react';
 import { Button, Divider, Form, Input, Modal, Space, Typography, message } from 'antd';
 import { getEnvString } from 'shared/env';
-
+import { login, register } from '../../store/auth/slices/thunks';
+import { useAppDispatch } from '../../store/hooks';
+import { useAppSelector } from '../../store/hooks';
+import { AuthState, AuthLoginRequest, AuthRegisterRequest, AuthLoginResponse, AuthRegisterResponse } from '../../store/auth/slices/type';
 import './AuthModal.scss';
 
 type AuthMode = 'login' | 'register';
@@ -62,6 +65,9 @@ function FacebookIcon(): React.ReactElement {
 }
 
 export default function AuthModal({ open, mode, onClose, onModeChange }: Props): React.ReactElement {
+  const dispatch = useAppDispatch();
+  // Lấy trạng thái loading từ auth slice để hiển thị hiệu ứng trên nút bấm
+  const { isLoading } = useAppSelector((state) => state.auth);
   const googleAuthUrl = getEnvString('GOOGLE_AUTH_URL');
   const facebookAuthUrl = getEnvString('FACEBOOK_AUTH_URL');
 
@@ -74,6 +80,36 @@ export default function AuthModal({ open, mode, onClose, onModeChange }: Props):
     window.location.assign(url);
   };
 
+  interface AuthFormValues {
+    email: string;
+    password: string;
+  }
+
+  const [form] = Form.useForm<AuthFormValues>();
+
+  // Xử lý Đăng nhập
+  const handleLogin = async (values: AuthLoginRequest) => {
+    const result = await dispatch(login(values));
+    if (login.fulfilled.match(result)) {
+      message.success('Đăng nhập thành công!');
+      onClose(); // Đóng modal sau khi thành công
+    } else {
+      // result.payload thường chứa message lỗi từ backend trả về
+      message.error((result.payload as string) || 'Đăng nhập thất bại');
+    }
+  };
+
+  // Xử lý Đăng ký
+  const handleRegister = async (values: AuthRegisterRequest) => {
+    const result = await dispatch(register(values));
+    if (register.fulfilled.match(result)) {
+      message.success('Đăng ký thành công! Vui lòng đăng nhập.');
+      onModeChange('login'); // Chuyển sang form đăng nhập
+    } else {
+      message.error((result.payload as string) || 'Đăng ký thất bại');
+    }
+  };
+
   return (
     <Modal open={open} onCancel={onClose} footer={null} centered destroyOnClose width={420}>
       {mode === 'login' ? (
@@ -82,7 +118,7 @@ export default function AuthModal({ open, mode, onClose, onModeChange }: Props):
             Đăng nhập
           </Title>
 
-          <Form layout='vertical' onFinish={() => void message.success('Đã submit đăng nhập (demo)')}>
+          <Form form={form} layout='vertical' onFinish={handleLogin}>
             <Form.Item name='email' label='Email' rules={[{ required: true, message: 'Vui lòng nhập email' }]}>
               <Input placeholder='Email đăng nhập' autoComplete='email' />
             </Form.Item>
@@ -90,7 +126,7 @@ export default function AuthModal({ open, mode, onClose, onModeChange }: Props):
               <Input.Password placeholder='Mật khẩu' autoComplete='current-password' />
             </Form.Item>
 
-            <Button type='primary' htmlType='submit' block>
+            <Button type='primary' htmlType='submit' loading={isLoading} block>
               Đăng nhập
             </Button>
           </Form>
@@ -133,7 +169,7 @@ export default function AuthModal({ open, mode, onClose, onModeChange }: Props):
             Đăng ký
           </Title>
 
-          <Form layout='vertical' onFinish={() => void message.success('Đã submit đăng ký (demo)')}>
+          <Form layout='vertical' onFinish={handleRegister}>
             <Form.Item name='name' label='Họ và tên' rules={[{ required: true, message: 'Vui lòng nhập họ và tên' }]}>
               <Input placeholder='Họ và tên' autoComplete='name' />
             </Form.Item>
@@ -160,7 +196,7 @@ export default function AuthModal({ open, mode, onClose, onModeChange }: Props):
               <Input.Password placeholder='Nhập lại mật khẩu' autoComplete='new-password' />
             </Form.Item>
 
-            <Button type='primary' htmlType='submit' block>
+            <Button type='primary' htmlType='submit' loading={isLoading} block>
               Đăng ký
             </Button>
           </Form>

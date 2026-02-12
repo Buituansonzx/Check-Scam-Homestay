@@ -45,6 +45,14 @@ return Application::configure(basePath: $basePath)
         $middleware->redirectGuestsTo(static function (Request $request): string {
             return action([LoginController::class, 'showForm']);
         });
+        $middleware->validateCsrfTokens(except: [
+            'api/*', // Loại bỏ kiểm tra CSRF cho các route API
+        ]);
+
+        $middleware->use([
+            ValidateAppId::class,
+            \Illuminate\Http\Middleware\HandleCors::class, // Đảm bảo Middleware CORS được sử dụng toàn cục
+        ]);
     })
     ->withCommands($apiato->commands())
     ->withExceptions(static function (Exceptions $exceptions) {})

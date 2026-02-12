@@ -20,7 +20,7 @@ return [
     'allowed_methods' => ['*'],
 
     'allowed_origins' => [
-        'url' => env('FRONTEND_URL', env('APP_URL', 'http://localhost:3000')),
+        env('FRONTEND_URL', 'http://localhost:3000'), 
     ],
 
     'allowed_origins_patterns' => [],
@@ -31,6 +31,6 @@ return [
 
     'max_age' => 0,
 
-    'supports_credentials' => false,
+    'supports_credentials' => true,
 
 ];
