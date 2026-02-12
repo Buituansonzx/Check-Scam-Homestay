@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import * as thunks from "./thunks";
 import { AuthState, AuthLoginRequest, AuthLoginResponse, AuthRegisterRequest, AuthRegisterResponse } from "./type";
-import { setCookie } from "../../../shared/utils/cookie";
+import { setCookie, removeCookie } from "../../../shared/utils/cookie";
 
 const initialState: AuthState = {
     user: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user') as string) : null,
@@ -20,7 +20,7 @@ const AuthSlice = createSlice({
             state.isLoading = false;
             state.error = null;
             localStorage.removeItem('user');
-            // Remove cookie token logic if needed here or handle in component
+            removeCookie('access_token');
         },
         setLoginSuccess: (state, action) => {
             state.isLoading = false;
