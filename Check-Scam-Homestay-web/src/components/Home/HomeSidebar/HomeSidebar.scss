@@ -1,0 +1,74 @@
+.homeSidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.homeSidebar__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.homeSidebar__navItem {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  padding: 10px 10px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.75);
+}
+
+.homeSidebar__navItem:hover {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.homeSidebar__navItem--active {
+  background: #ff6b35;
+  color: #fff;
+}
+
+.homeSidebar__navIcon {
+  display: inline-flex;
+  width: 18px;
+  height: 18px;
+  align-items: center;
+  justify-content: center;
+}
+
+.homeSidebar__quickSearch.ant-btn {
+  border-radius: 999px;
+  height: 40px;
+  background: #ff6b35;
+  border-color: #ff6b35;
+  color: #fff;
+}
+
+.homeSidebar__quickSearch.ant-btn:hover {
+  background: #ff6b35;
+  border-color: #ff6b35;
+  color: #fff;
+}
+
+.homeSidebar__reportCard.ant-card {
+  border-radius: 40px;
+  background: linear-gradient(180deg, #fff7ed 0%, #ffedd5 100%);
+  border: 1px solid #ffedd5;
+}
+
+.homeSidebar__reportTitle {
+  color: #9a3412;
+}
+
+.homeSidebar__reportDesc {
+  font-size: 12px;
+  color: #c2410ccc;
+}
+
+.homeSidebar__reportBtn.ant-btn {
+  border-radius: 999px;
+}

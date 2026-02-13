@@ -17,7 +17,7 @@ final class LoginAction extends ParentAction
 
         if (!$user || !Hash::check($data['password'], $user->password)) {
             throw ValidationException::withMessages([
-                'email' => ['Email hoặc mật khẩu không đúng.'],
+                'password' => ['Email hoặc mật khẩu không đúng.'],
             ]);
         }
 

@@ -24,4 +24,21 @@ final class RegisterUserRequest extends ParentRequest
             'birth' => 'date',
         ];
     }
+    public function messages(): array {
+        return [
+            'email.required' => 'Email không được để trống',
+            'email.email' => 'Email không hợp lệ',
+            'email.unique' => 'Email đã tồn tại',
+            'password.required' => 'Mật khẩu không được để trống',
+            'password.min' => 'Mật khẩu phải có ít nhất :min ký tự',
+            'password.symbols' => 'Mật khẩu phải chứa ít nhất một ký tự đặc biệt',
+            'password.numbers' => 'Mật khẩu phải chứa ít nhất một chữ số',
+            'password.mixed' => 'Mật khẩu phải bao gồm cả chữ hoa và chữ thường',
+            'password.letters' => 'Mật khẩu phải chứa ít nhất một chữ cái',
+            'name.min' => 'Tên phải có ít nhất 2 ký tự',
+            'name.max' => 'Tên phải có nhiều nhất 50 ký tự',
+            'gender.enum' => 'Giới tính không hợp lệ',
+            'birth.date' => 'Ngày sinh không hợp lệ',
+        ];
+    }
 }

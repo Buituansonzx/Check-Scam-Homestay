@@ -40,6 +40,7 @@
         "apiato/social-auth-container": "*",
         "intervention/image": "^3.11",
         "laravel/passport": "^13.0",
+        "laravel/sanctum": "^4.0",
         "spatie/laravel-permission": "^6.0",
         "wikimedia/composer-merge-plugin": "^2.1"
     },

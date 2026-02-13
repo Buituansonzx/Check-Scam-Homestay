@@ -1,0 +1,35 @@
+.headerFilter {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.headerFilter__input.ant-input-affix-wrapper {
+  width: 100%;
+  max-width: 560px;
+  height: 36px;
+  padding: 0 12px;
+  border-radius: 999px;
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+  box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.headerFilter__input.ant-input-affix-wrapper:hover {
+  border-color: #cbd5f5;
+}
+
+.headerFilter__input.ant-input-affix-wrapper-focused {
+  border-color: #ff6b35;
+  box-shadow: 0 0 0 2px rgba(255, 107, 53, 0.12);
+  background: #fff;
+}
+
+.headerFilter__input .ant-input-prefix {
+  color: #94a3b8;
+}
+
+.headerFilter__input .ant-input {
+  font-size: 13px;
+  color: #0f172a;
+}
