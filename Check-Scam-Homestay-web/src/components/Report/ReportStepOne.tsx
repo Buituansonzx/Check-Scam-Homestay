@@ -1,9 +1,10 @@
-import { UploadOutlined } from '@ant-design/icons';
 import { Button, Card, Input, Typography } from 'antd';
 import React from 'react';
+import { DocsIcon, InfoIcon, MedalIcon, PinIcon, UploadIcon, RedirectIcon } from './ReportIcons';
 
 import ReportHeader from './ReportHeader';
 import ReportReward from './ReportReward';
+import './ReportStepOne.scss';
 
 const { Text } = Typography;
 
@@ -41,7 +42,7 @@ export default function ReportStepOne({
         <Card bordered={false} className='reportCard'>
           <div className='reportCard__heading'>
             <div className='reportCard__icon' aria-hidden>
-              <span />
+              <InfoIcon />
             </div>
             <div className='reportCard__title'>1. Thông tin đối tượng bị tố cáo</div>
           </div>
@@ -72,7 +73,7 @@ export default function ReportStepOne({
         <Card bordered={false} className='reportCard'>
           <div className='reportCard__heading'>
             <div className='reportCard__icon reportCard__icon--orange' aria-hidden>
-              <span />
+              <DocsIcon />
             </div>
             <div className='reportCard__title'>2. Nội dung chi tiết vụ việc</div>
           </div>
@@ -86,13 +87,13 @@ export default function ReportStepOne({
           />
 
           <div className='reportUploadLabel'>
-            <span className='reportUploadLabel__dot' aria-hidden />
+            <PinIcon className='reportUploadLabel__pin' aria-hidden />
             <span>Tải lên bằng chứng (Chat, Biên lai chuyển tiền)</span>
           </div>
 
           <div className='reportUpload' role='group' aria-label='Tải lên bằng chứng'>
             <div className='reportUpload__icon' aria-hidden>
-              <UploadOutlined />
+              <UploadIcon />
             </div>
             <div className='reportUpload__title'>Kéo thả ảnh vào đây</div>
             <Text className='reportUpload__sub'>Hỗ trợ JPG, PNG, tối đa 5 ảnh (Max 10MB/ảnh)</Text>
@@ -101,10 +102,14 @@ export default function ReportStepOne({
       </div>
 
       <div className='reportPage__footer'>
-        <ReportReward label='Điểm uy tín nhận được' value='+100 Trust Points' />
+        <ReportReward
+          label='Điểm uy tín nhận được'
+          value='+100 Trust Points'
+          icon={<MedalIcon className='reportReward__medalIcon' aria-hidden />}
+        />
 
         <Button type='primary' className='reportSubmit' onClick={onNext}>
-          Gửi Tố cáo &amp; Cảnh báo <span className='reportSubmit__arrow' aria-hidden>›</span>
+          Gửi Tố cáo &amp; Cảnh báo <RedirectIcon className='reportSubmit__icon' aria-hidden />
         </Button>
       </div>
     </>

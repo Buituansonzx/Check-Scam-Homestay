@@ -1,5 +1,6 @@
 import React from 'react';
 import { Typography } from 'antd';
+import './ReportHeader.scss';
 
 const { Title, Text } = Typography;
 
