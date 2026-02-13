@@ -11,6 +11,9 @@ final class PostType extends ParentModel
     protected $table = "post_types";
 
     protected $guarded = [];
+    CONST CODE_REPORT = 'REPORT';
+    CONST CODE_REVIEW = 'REVIEW';
+    CONST CODE_NOMAL_POST = 'NOMAL_POST';
 
     public function posts()
     {
