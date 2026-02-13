@@ -16,7 +16,6 @@ final class SocialCallbackController extends ApiController
         $user = $result['user'];
         $token = $result['access_token'];
 
-        // Use env variable or default frontend URL
         $frontendUrl = config('app.frontend_url', 'http://localhost:3000') . '/auth/callback';
         
         $userData = rawurlencode(json_encode([

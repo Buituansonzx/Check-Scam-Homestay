@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @apiGroup           Report
- * @apiName
+ * @apiGroup           Post
+ * @apiName            
  *
- * @api                {POST} /v1/report Create
+ * @api                {POST} /v1/posts Create
  * @apiDescription     Endpoint description here...
  *
  * @apiVersion         1.0.0
@@ -22,8 +22,8 @@
  * }
  */
 
-use App\Containers\ClientSection\Report\UI\API\Controllers\ReportController;
+use App\Containers\ClientSection\Post\UI\API\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
-Route::post('report/bank', [ReportController::class, 'createReportBank']);
+Route::post('posts', [PostController::class, 'create']);
 
