@@ -1,5 +1,30 @@
 # PROMPT: Tạo migration cho table post_type, posts, post_images, comments, comment_images
 
+post_type :
+
+- tên migrate : create_post_types_table
+- tên file : post_types
+
+posts :
+
+- tên migrate : create_posts_table
+- tên file : posts
+
+post_images :
+
+- tên migrate : create_post_images_table
+- tên file : post_images
+
+comments :
+
+- tên migrate : create_comments_table
+- tên file : comments
+
+comment_images :
+
+- tên migrate : create_comment_images_table
+- tên file : comment_images
+
 ## Context
 
 - Project: Check Scam Homestay
@@ -43,6 +68,7 @@ posts:
   - post_type_id: UUID FK nullable -> post_types.id (ON DELETE SET NULL)
   - title: string(255) NOT NULL -> tiêu đề
   - content: text NOT NULL -> nội dung
+  - amount_of_money_scammed: decimal(15,2) nullable -> số tiền bị lừa đảo (VND)
   - is_anonymous: boolean default false -> có ẩn danh không
   - views: int default 0 -> số lượt xem
   - likes: int default 0 -> số lượt thích
@@ -51,7 +77,7 @@ posts:
 
 Indexes:
   - PK: id
-  - INDEX: object_id, post_type_id, user_id, is_anonymous
+  - INDEX: object_id, post_type_id, user_id, is_anonymous, amount_of_money_scammed
   - FULLTEXT: title, content
   - FK: object_id -> objects(id) ON DELETE CASCADE
   - FK: user_id -> users(id) ON DELETE SET NULL
@@ -66,6 +92,7 @@ post_images:
   - post_id: UUID FK nullable -> posts.id (ON DELETE CASCADE)
   - file_path: string(500) NOT NULL -> đường dẫn file trên S3 (key)
   - file_name: string(255) NOT NULL -> tên file gốc
+  - amount_of_money_scammed: decimal(10,2) NOT NULL -> số tiền bị lừa đảo
   - file_size: bigint NOT NULL -> kích thước file (bytes)
   - mime_type: string(100) NOT NULL -> loại MIME (image/jpeg, image/png, etc.)
   - disk: string(50) default 's3' -> storage disk name
@@ -81,6 +108,7 @@ post_images:
   - alt_text: string(255) nullable -> mô tả ảnh (SEO)
   - timestamps
   - deleted_at: timestamp nullable -> soft delete
+
 
 Indexes:
   - PK: id
@@ -138,158 +166,3 @@ Indexes:
   - INDEX: comment_id, order
   - FK: comment_id -> comments(id) ON DELETE CASCADE
 ```
-
----
-
-## Business Rules
-
-### post_types
-
-- name phải unique
-- Soft delete để giữ lịch sử
-
-### posts
-
-- object_id bắt buộc (liên kết với homestay/saller)
-- user_id nullable: cho phép admin tạo post
-- is_anonymous = true: ẩn thông tin user khi hiển thị
-- views, likes >= 0
-
-### post_images & comment_images
-
-- file_size > 0
-- mime_type phải bắt đầu với 'image/'
-- Chỉ có 1 ảnh is_primary = true cho mỗi post (post_images)
-- order >= 0
-- variants format JSON:
-    ```json
-    {
-        "thumbnail": { "path": "...", "width": 150, "height": 150 },
-        "medium": { "path": "...", "width": 800, "height": 600 },
-        "large": { "path": "...", "width": 1920, "height": 1080 }
-    }
-    ```
-
-### comments
-
-- parent_id nullable: null = comment gốc, có giá trị = reply
-- Hỗ trợ nested comments (comment con)
-- is_anonymous = true: ẩn thông tin user
-
----
-
-## Relationships
-
-### post_types
-
-- Has Many: posts (1-N)
-
-### posts
-
-- Belongs To: objects (N-1, nullable)
-- Belongs To: users (N-1, nullable)
-- Belongs To: post_types (N-1, nullable)
-- Has Many: post_images (1-N)
-- Has Many: comments (1-N)
-
-### post_images
-
-- Belongs To: posts (N-1)
-
-### comments
-
-- Belongs To: posts (N-1)
-- Belongs To: users (N-1, nullable)
-- Belongs To: comments (parent) (N-1, nullable) -> self-referencing
-- Has Many: comments (children) (1-N) -> self-referencing
-- Has Many: comment_images (1-N)
-
-### comment_images
-
-- Belongs To: comments (N-1)
-
----
-
-## S3 Configuration
-
-### Environment Variables
-
-```env
-AWS_ACCESS_KEY_ID=
-AWS_SECRET_ACCESS_KEY=
-AWS_DEFAULT_REGION=ap-southeast-1
-AWS_BUCKET=check-scam-homestay-images
-AWS_URL=
-AWS_ENDPOINT=
-AWS_USE_PATH_STYLE_ENDPOINT=false
-```
-
-### S3 Fields Explanation
-
-- **file_path**: Đường dẫn tương đối trong bucket (e.g., `posts/2026/02/abc123.jpg`)
-- **s3_bucket**: Tên bucket (e.g., `check-scam-homestay-images`)
-- **s3_region**: AWS region (e.g., `ap-southeast-1`)
-- **s3_url**: URL đầy đủ (e.g., `https://s3.ap-southeast-1.amazonaws.com/bucket/path`)
-- **cdn_url**: URL qua CDN (e.g., `https://cdn.example.com/path`)
-
----
-
-## Migration Order
-
-```
-1. post_types
-2. posts (depends on: objects, users, post_types)
-3. post_images (depends on: posts)
-4. comments (depends on: posts, users)
-5. comment_images (depends on: comments)
-```
-
----
-
-## Commands
-
-```bash
-# Tạo migrations
-php artisan make:migration create_post_types_table
-php artisan make:migration create_posts_table
-php artisan make:migration create_post_images_table
-php artisan make:migration create_comments_table
-php artisan make:migration create_comment_images_table
-
-# Run migrations
-php artisan migrate
-```
-
----
-
-## Use Cases
-
-### Posts
-
-- Tạo bài viết review homestay
-- Báo cáo lừa đảo
-- Đăng ẩn danh
-- Upload nhiều ảnh kèm theo
-
-### Comments
-
-- Bình luận vào bài viết
-- Reply bình luận (nested)
-- Đăng ẩn danh
-- Đính kèm ảnh chứng cứ
-
-### Images (S3)
-
-- Upload ảnh lên S3 tự động
-- Tạo variants (thumbnail, medium, large)
-- Serve qua CloudFront CDN
-- Tự động xóa khi xóa post/comment
-
----
-
-## Notes
-
-- Sử dụng Laravel Filesystem với S3 driver
-- Nên implement queue job để xử lý upload/resize ảnh
-- Soft delete cho tất cả bảng để giữ lịch sử
-- Nested comments: tối đa 3 cấp để tránh phức tạp
