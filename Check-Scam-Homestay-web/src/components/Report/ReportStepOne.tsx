@@ -1,5 +1,6 @@
 import { Button, Card, Input, Typography } from 'antd';
 import React from 'react';
+import { CardIcon, DollarIcon, FingersprintIcon, LinkIcon, ProfileIcon } from './FormIcons';
 import { DocsIcon, InfoIcon, MedalIcon, PinIcon, UploadIcon, RedirectIcon } from './ReportIcons';
 
 import ReportHeader from './ReportHeader';
@@ -49,20 +50,42 @@ export default function ReportStepOne({
 
           <div className='reportGrid'>
             <div className='reportField'>
-              <div className='reportField__label'>Số điện thoại / STK / Link trang cá nhân</div>
+              <div className='reportField__label'>Họ tên</div>
               <Input
-                value={subjectValue}
-                onChange={(e) => onChangeSubject(e.target.value)}
+                prefix={<ProfileIcon />}
+                placeholder='Nhập Họ tên của đối tượng bị tố cáo'
+                className='reportInput'
+              />
+            </div>
+            <div className='reportField'>
+              <div className='reportField__label'>Link trang cá nhân</div>
+              <Input
+                prefix={<LinkIcon />}
+                placeholder='Liên kết đến trang cá nhân'
+                className='reportInput'
+              />
+            </div>
+            <div className='reportField'>
+              <div className='reportField__label'>Số điện thoại</div>
+              <Input
+                prefix={<FingersprintIcon />}
                 placeholder='Dùng để định danh kẻ lừa đảo...'
                 className='reportInput'
               />
             </div>
 
             <div className='reportField'>
+              <div className='reportField__label'>Số tài khoản</div>
+              <Input
+                prefix={<CardIcon />}
+                placeholder='Nhập số tài khoản của đối tượng'
+                className='reportInput'
+              />
+            </div>
+            <div className='reportField'>
               <div className='reportField__label'>Số tiền bị lừa (VND)</div>
               <Input
-                value={amountValue}
-                onChange={(e) => onChangeAmount(e.target.value)}
+                prefix={<DollarIcon />}
                 placeholder='Ví dụ: 2,000,000'
                 className='reportInput'
               />
@@ -97,6 +120,34 @@ export default function ReportStepOne({
             </div>
             <div className='reportUpload__title'>Kéo thả ảnh vào đây</div>
             <Text className='reportUpload__sub'>Hỗ trợ JPG, PNG, tối đa 5 ảnh (Max 10MB/ảnh)</Text>
+          </div>
+        </Card>
+
+        <Card bordered={false} className='reportCard'>
+          <div className='reportCard__heading'>
+            <div className='reportCard__icon' aria-hidden>
+              <InfoIcon />
+            </div>
+            <div className='reportCard__title'>3. Thông tin người tố cáo</div>
+          </div>
+
+          <div className='reportGrid'>
+            <div className='reportField'>
+              <div className='reportField__label'>Họ tên</div>
+              <Input
+                prefix={<ProfileIcon />}
+                placeholder='Nhập họ tên của bạn'
+                className='reportInput'
+              />
+            </div>
+            <div className='reportField'>
+              <div className='reportField__label'>Số điện thoại</div>
+              <Input
+                prefix={<FingersprintIcon />}
+                placeholder='Nhập số điện thoại của bạn'
+                className='reportInput'
+              />
+            </div>
           </div>
         </Card>
       </div>

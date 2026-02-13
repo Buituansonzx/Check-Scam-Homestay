@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 import './Report.scss';
 
@@ -7,24 +8,25 @@ import ReportStepTwo from '../../components/Report/ReportStepTwo';
 import ReportStepThree from '../../components/Report/ReportStepThree';
 
 export default function Report(): React.ReactElement {
-  const [step, setStep] = React.useState(1); // 1: Input Form, 2: Confirmation, 3: Success
+  const [searchParams, setSearchParams] = useSearchParams();
+  const step = parseInt(searchParams.get('step') || '1', 10);
+
   const [subjectValue, setSubjectValue] = React.useState('');
   const [amountValue, setAmountValue] = React.useState('');
   const [detailValue, setDetailValue] = React.useState('');
   const [agreed, setAgreed] = React.useState(false);
 
   const handleNextStep = () => {
-    // Validation logic could go here
-    setStep(2);
+    setSearchParams({ step: '2' }, { replace: true });
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleBackStep = () => {
-    setStep(1);
+    setSearchParams({ step: '1' }, { replace: true });
   };
 
   const handleSubmitReport = () => {
-    setStep(3);
+    setSearchParams({ step: '3' }, { replace: true });
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 

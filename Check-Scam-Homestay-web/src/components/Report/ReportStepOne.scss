@@ -67,18 +67,27 @@
   margin-bottom: 8px;
 }
 
-.reportInput.ant-input {
+.reportInput.ant-input-affix-wrapper {
   border-radius: 14px;
   height: 42px;
   background: #f8fafc;
   border-color: transparent;
+  padding-left: 14px;
 }
 
-.reportInput.ant-input:focus,
-.reportInput.ant-input-focused {
+.reportInput.ant-input-affix-wrapper:focus,
+.reportInput.ant-input-affix-wrapper-focused {
   border-color: #ff6b35;
   box-shadow: 0 0 0 2px rgba(255, 107, 53, 0.15);
   background: #ffffff;
+}
+
+.reportInput.ant-input {
+  background: transparent;
+}
+
+.reportInput.ant-input:focus {
+  box-shadow: none;
 }
 
 .reportTextarea.ant-input {

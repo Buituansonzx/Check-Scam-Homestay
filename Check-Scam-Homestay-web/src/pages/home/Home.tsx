@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import HomeSidebar from '../../components/Home/HomeSidebar/HomeSidebar';
 import HomeFeedHeader from '../../components/Home/HomeFeedHeader/HomeFeedHeader';
@@ -10,10 +11,20 @@ import BadgeLegendCard from '../../components/Home/RightPanel/BadgeLegendCard';
 import './Home.scss';
 
 export default function Home(): React.ReactElement {
+  const navigate = useNavigate();
+
   return (
     <div className='homePage'>
       <div className='homePage__grid'>
-        <HomeSidebar />
+        <HomeSidebar
+          activeKey='feed'
+          onNavClick={(key) => {
+            if (key === 'feed') navigate('/');
+            if (key === 'lookup') navigate('/lookup');
+          }}
+          onQuickSearch={() => navigate('/search')}
+          onReport={() => navigate('/report')}
+        />
 
         <main className='homePage__center'>
           <HomeFeedHeader />
