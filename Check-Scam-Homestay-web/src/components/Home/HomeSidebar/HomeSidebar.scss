@@ -54,6 +54,55 @@
   color: #fff;
 }
 
+.homeSidebar__helpCard.ant-card {
+  border-radius: 24px;
+  border: 1px solid #eef2f7;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+}
+
+.homeSidebar__helpHeading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.homeSidebar__helpDot {
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #ff6b35;
+  flex: none;
+}
+
+.homeSidebar__helpTitle {
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  color: #0f172a;
+}
+
+.homeSidebar__helpList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.75);
+}
+
+.homeSidebar__helpItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.homeSidebar__helpCheck {
+  color: #22c55e;
+  flex: none;
+}
+
 .homeSidebar__reportCard.ant-card {
   border-radius: 40px;
   background: linear-gradient(180deg, #fff7ed 0%, #ffedd5 100%);

@@ -1,6 +1,8 @@
 import React from 'react';
 import { Button, Card, Space, Typography } from 'antd';
 import {
+  CheckCircleFilled,
+  ExclamationCircleFilled,
   HomeOutlined,
   SearchOutlined,
   SafetyOutlined,
@@ -67,6 +69,34 @@ export default function HomeSidebar({
       >
         Tra cứu nhanh
       </Button>
+
+      {activeKey === 'lookup' ? (
+        <Card className='homeSidebar__helpCard' bordered={false}>
+          <div className='homeSidebar__helpHeading'>
+            <span className='homeSidebar__helpDot' aria-hidden>
+              <ExclamationCircleFilled />
+            </span>
+            <Text strong className='homeSidebar__helpTitle'>
+              CHECKSTAY GIÚP BẠN
+            </Text>
+          </div>
+
+          <div className='homeSidebar__helpList'>
+            <div className='homeSidebar__helpItem'>
+              <CheckCircleFilled className='homeSidebar__helpCheck' aria-hidden />
+              <span>Phát hiện scam qua SĐT/STK</span>
+            </div>
+            <div className='homeSidebar__helpItem'>
+              <CheckCircleFilled className='homeSidebar__helpCheck' aria-hidden />
+              <span>Xem review thật từ cộng đồng</span>
+            </div>
+            <div className='homeSidebar__helpItem'>
+              <CheckCircleFilled className='homeSidebar__helpCheck' aria-hidden />
+              <span>Kiểm tra xác minh host thực tế</span>
+            </div>
+          </div>
+        </Card>
+      ) : null}
 
       <Card className='homeSidebar__reportCard' bordered={false}>
         <Space direction='vertical' size={8}>
