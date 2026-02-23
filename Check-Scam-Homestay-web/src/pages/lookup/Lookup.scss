@@ -323,9 +323,9 @@
         border-radius: 12px;
         width: 100%;
         
-        &:hover {
-          background: #FFEDD5;
-          color: #C2410C;
+        &:hover, &:focus {
+          background: #FFF7ED !important;
+          color: #EA580C !important;
         }
       }
     }
