@@ -15,7 +15,7 @@ final class CreateScamPostRequest extends ParentRequest
             'content' => 'required|string',
             'amount_of_money_scammed' => 'nullable|numeric',
             'images' => 'required|array',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:512000',
             'is_anonymous' => 'nullable|boolean',
             'link_scam' => 'nullable|string',
             'phone_scammer' => 'nullable|string',
