@@ -2,6 +2,7 @@
 
 namespace App\Ship\Services;
 
+use App\Containers\ClientSection\Post\Models\PostImage;
 use App\Containers\SharedSection\Report\Models\ReportEvidance;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -31,14 +32,16 @@ class ImageService
         $path = $file->store($dir, $disk);
 
         [$w, $h] = getimagesize($file->getRealPath());
-        $modelClass = ReportEvidance::class;
+        $modelClass = PostImage::class;
         $commonData = [
-            'report_id' => $data['report_id'],
+            'post_id' => $data['post_id'],
             'disk'   => $disk,
-            'path'   => $path,
+            'file_path'   => $path,
             'width'  => $w,
             'height' => $h,
-            'mime'   => $file->getMimeType(),
+            'mime_type'   => $file->getMimeType(),
+            'file_name'   => $file->getClientOriginalName(),
+            'file_size'   => $file->getSize(),
         ];
         $media = $modelClass::create($commonData);
         $variants = $this->generateVariants($media);
@@ -54,10 +57,10 @@ class ImageService
         $quality = config('image.quality', ['jpg' => 100, 'webp' => 100, 'jpeg' => 100, 'png' => 100]);
 
         $disk = Storage::disk($media->disk);
-        $origAbs = $disk->url($media->path);
+        $origAbs = $disk->url($media->file_path);
         $content = file_get_contents($origAbs); // tải về
         $img = $this->im->read($content)->orient(); // sửa hướng EXIF
-        $pathInfo = pathinfo($media->path);
+        $pathInfo = pathinfo($media->file_path);
         $base = $pathInfo['dirname'] . '/' . $pathInfo['filename'];
 
 
@@ -372,7 +375,7 @@ class ImageService
     }
 
     /** Xoá file & record. */
-    public function delete(Media $m): void
+    public function delete(PostImage $m): void
     {
         $disk = Storage::disk($m->disk);
         foreach (($m->variants ?? []) as $v) {

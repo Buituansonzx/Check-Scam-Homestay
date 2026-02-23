@@ -217,6 +217,7 @@
       <excludeFolder url="file://$MODULE_DIR$/check-scam-homestay-api/vendor/wikimedia/composer-merge-plugin" />
       <excludeFolder url="file://$MODULE_DIR$/check-scam-homestay-api/vendor/laravel/socialite" />
       <excludeFolder url="file://$MODULE_DIR$/check-scam-homestay-api/vendor/league/oauth1-client" />
+      <excludeFolder url="file://$MODULE_DIR$/check-scam-homestay-api/vendor/laravel/sanctum" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

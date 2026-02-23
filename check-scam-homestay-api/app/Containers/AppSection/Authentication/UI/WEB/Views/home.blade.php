@@ -88,7 +88,7 @@
         }
 
         /* Safe area support for devices with notches */
-        @supports (padding: max(0px)) {
+        @supports (padding: max(0)) {
             .safe-area-top {
                 padding-top: max(1rem, env(safe-area-inset-top));
             }
