@@ -28,6 +28,9 @@ objects:
   - link_website: string(500) nullable -> URL Website
   - link_other: string(500) nullable -> URL khác
   - is_scam: boolean default false -> trạng thái lừa đảo
+  - reporter_name: string(255) nullable -> Tên người tố cáo
+  - reporter_phone: string(20) nullable -> SĐT người tố cáo
+  - accused_name: string(255) nullable -> Tên người bị tố
   - parent_id: UUID FK nullable -> objects.id (ON DELETE CASCADE)
   - timestamps
 
@@ -54,6 +57,9 @@ object_groups:
   - link_websites: json nullable -> Mảng URL Website ["https://example.com"]
   - link_others: json nullable -> Mảng URL khác ["https://other.com"]
   - is_scam: boolean default false -> trạng thái lừa đảo
+  - reporter_name: string(255) nullable -> Tên người tố cáo
+  - reporter_phone: string(20) nullable -> SĐT người tố cáo
+  - accused_name: string(255) nullable -> Tên người bị tố
   - timestamps
 
 Indexes:
